@@ -26,9 +26,17 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
+            for(Cell step : steps) {
+                if (findBy(step) == -1) {
+                    if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                        rst = true;
+                        this.figures[index] = this.figures[index].copy(dest);
+                    }
+                }
+                else {
+                    System.out.println("You can't walk through figures!");
+                    break;
+                }
             }
         }
         return rst;
